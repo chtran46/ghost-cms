@@ -7,6 +7,7 @@ COPY --chown=node:node --from=cloudinary $GHOST_INSTALL/current/node_modules $GH
 COPY --chown=node:node --from=cloudinary $GHOST_INSTALL/current/node_modules/ghost-storage-cloudinary $GHOST_INSTALL/current/core/server/adapters/storage/ghost-storage-cloudinary
 RUN set -ex; \
     su-exec node ghost config storage.active ghost-storage-cloudinary; \
+    su-exec node ghost config storage.ghost-storage-cloudinary.useDatedFolder true; \
     su-exec node ghost config storage.ghost-storage-cloudinary.upload.use_filename true; \
     su-exec node ghost config storage.ghost-storage-cloudinary.upload.unique_filename false; \
     su-exec node ghost config storage.ghost-storage-cloudinary.upload.overwrite false; \
