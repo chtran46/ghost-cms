@@ -5,10 +5,10 @@ My custom Ghost configuration.
 This configuration is based on base Ghost plus Cloudinary integration. As I am running on RPi 4, SD card space is at a premium so I wanted to store content remotely.  Cloudinary was a good choice because of its neat [transformation capabilities](https://cloudinary.com/documentation/image_transformations).
 
 Cloudinary integration is based off of [https://github.com/eexit/ghost-storage-cloudinary](https://github.com/eexit/ghost-storage-cloudinary). The Docker build as described on the page never worked for me for some reason. The `RUN su-exec node yarn add ghost-storage-cloudinary@2` seemed to freeze up during the build. Not sure for what reason. So instead followed the Install from Yarn step after container startup, then run some of the steps manually. Then create an image from the container.
-<br>
+
 ## Base Image Dockerfile
-<br>
-```
+
+``` Dockerfile
 version: '3.1'
 
 services:
@@ -32,8 +32,8 @@ volumes:
 Start container and connect to shell
 
 ## Run in Shell to install Cloudinary integration
-<br>
-```
+
+```Shell
 cd $GHOST_INSTALL
 yarn add ghost-storage-cloudinary@2 --network-timeout 100000
 mkdir -p content/adapters/storage
@@ -65,8 +65,8 @@ These are my configurations that I found useful.  See [https://github.com/eexi
 
 The above `ghost config` commands updates the `config.production.json` configuration file. This can be lost (unless you create image from container). Here, after the above configuration, we can make move to `/var/lib/ghost/content` that is mounted on a disk volume and then create a soft link to it.
 
-<br>
-```
+
+```Shell
 cd $GHOST_INSTALL
 mv config.production.json /var/lib/ghost/content/config.production.json
 ln -s ./content/config.production.json config.production.json
