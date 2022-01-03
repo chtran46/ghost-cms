@@ -29,11 +29,21 @@ module.exports = function(grunt) {
                     }
                 }
             }
+        },
+        uglify: {
+            options: {
+            banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+            },
+            build: {
+                src: 'dist/jquery.ghosthunter.js',
+                dest: '../casper-theme/assets/js/<%= pkg.name %>.min.js'
+            }
         }
     });
     
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-uglify'); 
     
     // Default task(s).
-    grunt.registerTask('default', ['copy']);
+    grunt.registerTask('default', ['copy', 'uglify']);
 };
