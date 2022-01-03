@@ -9,6 +9,11 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
+      - name: Print working dir
+        run: |
+          ls -la $PWD
+          echo $GITHUB_WORKSPACE
+          ls -la $GITHUB_WORKSPACE
       - name: Deploy Ghost Theme
         env: 
           GITHUB_WORKSPACE: /home/runner/work/ghost-cms/ghost-cms/casper-theme
