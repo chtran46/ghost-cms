@@ -7,6 +7,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-18.04
+    env: 
+      GITHUB_WORKSPACE: /home/runner/work/ghost-cms/ghost-cms/casper-theme/
     steps:
       - uses: actions/checkout@v2
       - name: Print working dir
@@ -15,8 +17,6 @@ jobs:
           echo $GITHUB_WORKSPACE
           ls -la $GITHUB_WORKSPACE
       - name: Deploy Ghost Theme
-        env: 
-          GITHUB_WORKSPACE: /home/runner/work/ghost-cms/ghost-cms/casper-theme
         uses: TryGhost/action-deploy-theme@v1.4.0
         with:
           api-url: ${{ secrets.GHOST_ADMIN_API_URL }}
