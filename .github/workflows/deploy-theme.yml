@@ -7,17 +7,12 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-18.04
-    env: 
-      GITHUB_WORKSPACE: /home/runner/work/ghost-cms/ghost-cms/casper-theme/
     steps:
       - uses: actions/checkout@v2
-      - name: Print working dir
-        run: |
-          ls -la $PWD
-          echo $GITHUB_WORKSPACE
-          ls -la $GITHUB_WORKSPACE
       - name: Deploy Ghost Theme
-        uses: TryGhost/action-deploy-theme@v1.4.0
+        uses: chtran46/action-deploy-theme@custom-dir
         with:
           api-url: ${{ secrets.GHOST_ADMIN_API_URL }}
           api-key: ${{ secrets.GHOST_ADMIN_API_KEY }}
+          theme-name: casper-chtran
+          working-directory: /casper-theme
