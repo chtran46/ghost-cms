@@ -14,7 +14,7 @@ version: '3.1'
 services:
 
   ghost:
-    #image: ghost:latest
+    image: ghost:latest
 
     restart: always
     ports:
