@@ -183,7 +183,7 @@
 		resultsData			: false,
 		onPageLoad			: false,
 		onKeyUp				: false,
-		result_template 	: "<a id='gh-{{ref}}' class='gh-search-item' href='{{link}}'><p><h2>{{title}}</h2><h4>{{prettyPubDate}}</h4></p></a>",
+		result_template 	: "<a id='gh-{{ref}}' class='gh-search-item' href='{{link}}'><p><h2>{{title}}</h2><h4>{{pubDate}}</h4></p></a>",
 		info_template		: "<p>Number of posts found: {{amount}}</p>",
 		displaySearchInfo	: true,
 		zeroResultsInfo		: true,
@@ -199,7 +199,9 @@
 	var prettyDate = function(date) {
 		var d = new Date(date);
 		var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-			return d.getDate() + ' ' + monthNames[d.getMonth()] + ' ' + d.getFullYear();
+		//var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+		//return d.getDate() + ' ' + monthNames[d.getMonth()] + ' ' + d.getFullYear();
+		return monthNames[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
 	};
 
 	var getSubpathKey = function(str) {
@@ -247,7 +249,8 @@
 		// console.log('ghostHunter: grabAndIndex');
 		this.blogData = {};
 		this.latestPost = 0;
-    var url = "/ghost/api/v2/content/posts/?key=" + ghosthunter_key + "&limit=all&include=tags";
+		var ghost_root = ghost_root_url || "/ghost/api/v2";
+        var url = ghost_root + "/content/posts/?key=" + ghosthunter_key + "&limit=all&include=tags";
 
 		var params = {
 			limit: "all",
@@ -288,10 +291,20 @@
 					if (category.length < 1){
 						category = "undefined";
 					}
+					// customized custom_excerpt
+					var my_custom_excerpt = arrayItem.custom_excerpt;
+					if (my_custom_excerpt == null || my_custom_excerpt == '') {
+						// use excerpt if custom_excerpt not found
+						my_custom_excerpt = arrayItem.excerpt;
+					}
+					// only use the first couple of words
+					my_custom_excerpt = my_custom_excerpt.split(' ').slice(0, 30).join(' ');
+					
 					var parsedData 	= {
 						id 			: String(arrayItem.id),
 						title 		: String(arrayItem.title),
-						description	: String(arrayItem.custom_excerpt),
+						//description	: String(arrayItem.custom_excerpt),
+						description : String(my_custom_excerpt),
 						pubDate 	: String(arrayItem.published_at),
 						tag 		: category
 					}
@@ -302,7 +315,8 @@
 					var localUrl = me.subpath + arrayItem.url
 					me.blogData[arrayItem.id] = {
 						title: arrayItem.title,
-						description: arrayItem.custom_excerpt,
+						//description: arrayItem.custom_excerpt,
+						description: my_custom_excerpt,
 						pubDate: prettyDate(parsedData.pubDate),
 						link: localUrl,
 						tags: tag_arr
@@ -404,8 +418,8 @@
 					filter: "updated_at:>\'" + this.latestPost.replace(/\..*/, "").replace(/T/, " ") + "\'",
 					fields: "id"
 				};
-
-        var url = "/ghost/api/v2/content/posts/?key=" + ghosthunter_key + "&limit=all&fields=id" + "&filter=" + "updated_at:>\'" + this.latestPost.replace(/\..*/, "").replace(/T/, " ") + "\'";
+		var ghost_root = ghost_root_url || "/ghost/api/v2";
+        var url = ghost_root + "/content/posts/?key=" + ghosthunter_key + "&limit=all&fields=id" + "&filter=" + "updated_at:>\'" + this.latestPost.replace(/\..*/, "").replace(/T/, " ") + "\'";
 
 				var me = this;
         $.get(url).done(function(data){
