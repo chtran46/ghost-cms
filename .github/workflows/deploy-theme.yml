@@ -10,8 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Deploy Ghost Theme
-        uses: chtran46/action-deploy-theme@custom-dir
+        env: 
+          GITHUB_WORKSPACE: ./casper-theme
+        uses: TryGhost/action-deploy-theme@v1.4.0
         with:
           api-url: ${{ secrets.GHOST_ADMIN_API_URL }}
           api-key: ${{ secrets.GHOST_ADMIN_API_KEY }}
-          working-directory: ./casper-theme
