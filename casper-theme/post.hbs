@@ -1,0 +1,289 @@
+{{!< default}}
+
+{{!-- The tag above means: insert everything in this file
+into the {body} tag of the default.hbs template --}}
+
+
+{{#post}}
+{{!-- Everything inside the #post block pulls data from the post --}}
+
+    <style>
+        :root {
+            {{#if @custom.header_button_background}}
+            --button-bg-color: {{@custom.header_button_background}};
+            {{/if}}
+            --button-text-color: {{#match @custom.header_button_text_color "Light"}}#fff{{else}}var(--color-darkgrey){{/match}};
+        }
+	  .pb {
+		position: fixed;
+		top: 0;
+		height: 5px;
+		width: 100%;
+		background: #ddd;
+	  }
+	  .pc {
+		position: fixed;
+		top: 8%;
+		right: 10px;
+	  }
+	  .bg {
+		border-radius: 50%;
+		width: 60px;
+		height: 60px;
+		background: #ddd;
+		margin-bottom: 20px;
+	  }
+	  .ol {
+		border-radius: 50%;
+		width: 44px;
+		height: 44px;
+		background: #292A2E;
+		position: absolute;
+		margin-top: 8px;
+		margin-left: 8px;
+		text-align: center;
+	  }
+	  
+		* {
+		  color: #888 !important;
+		}
+		*:hover {
+		  color: #aaa !important;
+		}
+		[class*="icono"] {
+		  position: relative;
+		  display: inline-block;
+		  vertical-align: middle;
+		  color: #666;
+		  box-sizing: border-box;
+		}
+		[class*="icono"]:after,
+		[class*="icono"]:before {
+		  content: "";
+		  box-sizing: border-box;
+		}
+		[class*="icono-arrow1"] {
+		  width: 20px;
+		  height: 20px;
+		  border-width: 4px 4px 0 0;
+		  border-style: solid;
+		  margin: 10px;
+		}
+		[class*="icono-arrow1"]:before {
+		  right: 0;
+		  top: -3px;
+		  position: absolute;
+		  height: 4px;
+		  box-shadow: inset 0 0 0 32px;
+		  transform: rotate(-45deg);
+		  width: 23px;
+		  transform-origin: right top;
+		}
+		[class*="icono-arrow1"][class*="-left"] {
+		  transform: rotate(45deg);
+		}
+		[class*="icono-arrow1"][class*="-left"][class*="-up"] {
+		  transform: none;
+		}
+		[class*="icono-arrow1"][class*="-left"][class*="-down"] {
+		  transform: rotate(90deg);
+		}
+		[class*="icono-arrow1"][class*="-right"] {
+		  transform: rotate(-135deg);
+		}
+		[class*="icono-arrow1"][class*="-right"][class*="-up"] {
+		  transform: rotate(-90deg);
+		}
+		[class*="icono-arrow1"][class*="-right"][class*="-down"] {
+		  transform: rotate(180deg);
+		}
+		[class*="icono-arrow1"][class*="-up"] {
+		  transform: rotate(-45deg);
+		}
+		[class*="icono-arrow1"][class*="-down"] {
+		  transform: rotate(135deg);
+		}
+    </style>
+    <script>
+      // https://css-tricks.com/how-i-put-the-scroll-percentage-in-the-browser-title-bar/
+      window.onscroll = () => {
+        let scrollTop = window.scrollY;
+        let docHeight = document.body.offsetHeight;
+        let winHeight = window.innerHeight;
+        let scrollPercent = scrollTop / (docHeight - winHeight);
+        let scrollPercentRounded = Math.round(scrollPercent * 100);
+        let degrees = scrollPercent * 360;
+        document.querySelector(
+          ".bg"
+        ).style.background = `conic-gradient(#498 ${degrees}deg, #ddd ${degrees}deg)`;
+        //document.querySelector(
+        //  ".pb"
+        //).style.background = `linear-gradient(to right, #498 ${scrollPercentRounded}%, #eee ${scrollPercentRounded}%)`;
+      };
+    </script>
+
+
+<main id="site-main" class="site-main">
+    <article class="article {{post_class}} {{#match @custom.post_image_width "Full"}}image-full{{else match @custom.post_image_width "=" "Small"}}image-small{{/match}}">
+
+        <header class="article-header gh-canvas">
+
+            {{#if primary_tag}}
+            <section class="article-tag">
+                <a href="{{primary_tag.url}}">{{primary_tag.name}}</a>
+            </section>
+            {{/if}}
+
+            <h1 class="article-title">{{title}}</h1>
+
+            {{#if custom_excerpt}}
+            <p class="article-excerpt">{{custom_excerpt}}</p>
+            {{/if}}
+
+            <div class="article-byline">
+                <section class="article-byline-content">
+                    <ul class="author-list">
+                        {{#foreach authors}}
+                        <li class="author-list-item">
+                            {{#if profile_image}}
+                            <a href="{{url}}" class="author-avatar">
+                                <img class="author-profile-image" src="{{img_url profile_image size="xs"}}" alt="{{name}}" />
+                            </a>
+                            {{else}}
+                            <a href="{{url}}" class="author-avatar author-profile-image">{{> "icons/avatar"}}</a>
+                            {{/if}}
+                        </li>
+                        {{/foreach}}
+                    </ul>
+                    <div class="article-byline-meta">
+                        <h4 class="author-name">{{authors}}</h4>
+                        <div class="byline-meta-content">
+                            <time class="byline-meta-date" datetime="{{date format="YYYY-MM-DD"}}">{{date}}</time>
+                            <span class="byline-reading-time"><span class="bull">&bull;</span> {{reading_time}}</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            {{#if feature_image}}
+            <figure class="article-image">
+                {{!-- This is a responsive image, it loads different sizes depending on device
+                https://medium.freecodecamp.org/a-guide-to-responsive-images-with-ready-to-use-templates-c400bd65c433 
+                <img
+                    srcset="{{img_url feature_image size="s"}} 300w,
+                            {{img_url feature_image size="m"}} 600w,
+                            {{img_url feature_image size="l"}} 1000w,
+                            {{img_url feature_image size="xl"}} 2000w"
+                    sizes="(min-width: 1400px) 1400px, 92vw"
+                    src="{{img_url feature_image size="xl"}}"
+                    alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                />
+				REPLACE with Cloudinary
+				--}}
+				<img
+					id="article-image-id_{{url}}"
+					sizes="(min-width: 1400px) 1400px, 92vw"
+                    alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+				/>
+				<script type="text/javascript">
+				{
+					function getPosition(string, subString, index) {
+					  return string.split(subString, index).join(subString).length;
+					}				
+					let imgurl="{{img_url feature_image}}";
+					let cloudinary_baseurl;
+					let cloudinary_public_id;
+					if (imgurl.includes("cloudinary")) {
+						cloudinary_public_id = imgurl.slice(getPosition(imgurl, '/', 8));
+						cloudinary_baseurl = "https://res.cloudinary.com/chtran/image/upload";
+					} else {
+						cloudinary_public_id = "/" + imgurl;
+						cloudinary_baseurl = "https://res.cloudinary.com/chtran/image/fetch";
+						// fetch URL needs to be escaped
+						// https://cloudinary.com/documentation/fetch_remote_images#creating_a_fetch_url_containing_special_characters
+						cloudinary_public_id = cloudinary_public_id.replace(/\?/g, "%3F");						
+					}
+					document.getElementById('article-image-id' + "_{{url}}").srcset =
+						cloudinary_baseurl + "/w_300" + cloudinary_public_id + " 300w," +
+						cloudinary_baseurl + "/w_600" + cloudinary_public_id + " 600w," +
+						cloudinary_baseurl + "/w_1000" + cloudinary_public_id + " 1000w," +
+						cloudinary_baseurl + "/w_2000" + cloudinary_public_id + " 2000w"
+					document.getElementById('article-image-id' + "_{{url}}").src = cloudinary_baseurl + "/w_2000" + cloudinary_public_id;
+				}
+				</script>				
+				
+                {{#if feature_image_caption}}
+                    <figcaption>{{feature_image_caption}}</figcaption>
+                {{/if}}
+            </figure>
+            {{/if}}
+        </header>
+
+        <section class="gh-content gh-canvas">
+            {{content}}
+        </section>
+
+        <section class="article-comments gh-canvas">
+			<div id="remark42"></div>
+			<script>
+			  var remark_config = {
+				host: "https://remark42.pi.canhtran.ca",
+				site_id: 'remark42.pi.canhtran.ca',
+				theme: 'dark',
+				components: ['embed']
+			  };
+			</script>
+			<script>!function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);</script>
+        </section>
+
+    </article>
+</main>
+
+{{!-- A signup call to action is displayed here, unless viewed as a logged-in member --}}
+{{#match @custom.email_signup_for_logged_out_visitors "!=" "None"}}
+{{#unless @member}}{{#if access}}
+    <section class="footer-cta {{#match @custom.email_signup_for_logged_out_visitors "Bottom of post"}}cta-alt{{/match}}">
+        <div class="inner">
+            {{#if @custom.email_signup_text}}<h2>{{@custom.email_signup_text}}</h2>{{/if}}
+            <a class="footer-cta-button" href="#/portal" data-portal>
+                <div class="footer-cta-input">Enter your email</div>
+                <span>Subscribe</span>
+            </a>
+            {{!-- ^ This looks like a form element, but it's just a link to Portal,
+            making the form validation and submission much simpler. --}}
+        </div>
+    </section>
+{{/if}}{{/unless}}
+{{/match}}
+
+
+{{!-- Read more links, just above the footer --}}
+{{#if @custom.show_recent_posts}}
+<aside class="read-more-wrap">
+    <div class="read-more inner">
+
+        {{!-- The {#get} helper below fetches some of the latest posts here
+        so that people have something else to read when they finish this one.
+
+        This query gets the latest 3 posts on the site, but adds a filter to
+        exclude the post we're currently on from being included. --}}
+
+        {{#get "posts" filter="id:-{{id}}" include="authors" limit="3" as |more_posts|}}
+            {{#if more_posts}}
+                {{#foreach more_posts}}
+                    {{> "post-card"}}
+                {{/foreach}}
+            {{/if}}
+        {{/get}}
+
+    </div>
+</aside>
+{{/if}}
+
+<!--    <div class="pb"></div>  this is the horizontal progress bar commented out -->
+    <div class="pc">
+      <div class="ol"><a href="#" class="icono-arrow1-up"></a></div>
+      <div class="bg"></div>
+    </div>
+
+{{/post}}
