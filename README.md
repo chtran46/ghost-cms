@@ -125,3 +125,12 @@ and getting a better looking search input
 [https://freefrontend.com/css-search-boxes/](https://freefrontend.com/css-search-boxes/)
 specifically inspired by
 [https://codepen.io/ahmadbassamemran/pen/rNjMXqg](https://codepen.io/ahmadbassamemran/pen/rNjMXqg)
+
+### Theme Build Integration
+
+Integrated with GitHub action that triggers on check in
+[https://github.com/TryGhost/action-deploy-theme](https://github.com/TryGhost/action-deploy-theme)
+modified due to how my repo is set up and a [PR](https://github.com/TryGhost/action-deploy-theme/pull/39) that is taking its time being accepted
+[https://github.com/chtran46/action-deploy-theme](https://github.com/chtran46/action-deploy-theme)
+with the action yml configured as
+[https://github.com/chtran46/ghost-cms/blob/main/.github/workflows/deploy-theme.yml](https://github.com/chtran46/ghost-cms/blob/main/.github/workflows/deploy-theme.yml)
