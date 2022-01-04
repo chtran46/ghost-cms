@@ -33,7 +33,7 @@ Start container and connect to shell
 
 ## Run in Shell to install Cloudinary integration
 
-```Shell
+``` Shell
 cd $GHOST_INSTALL
 yarn add ghost-storage-cloudinary@2 --network-timeout 100000
 mkdir -p content/adapters/storage
@@ -65,8 +65,7 @@ These are my configurations that I found useful.  See [https://github.com/eexi
 
 The above `ghost config` commands updates the `config.production.json` configuration file. This can be lost (unless you create image from container). Here, after the above configuration, we can make move to `/var/lib/ghost/content` that is mounted on a disk volume and then create a soft link to it.
 
-
-```Shell
+``` Shell
 cd $GHOST_INSTALL
 mv config.production.json /var/lib/ghost/content/config.production.json
 ln -s ./content/config.production.json config.production.json
@@ -77,3 +76,52 @@ ln -s ./content/config.production.json config.production.json
 `docker ps` to get the id of the running container
 
 Run `docker commit` to save your image - see [https://docs.docker.com/engine/reference/commandline/commit/](https://docs.docker.com/engine/reference/commandline/commit/)
+
+## Theme
+
+In addition to the configuration instructins above, this repo contains a modified Casper theme found in the subdirectory `casper-theme`
+
+I made some modifications to include a commenting system
+
+### Remark42
+
+[https://remark42.com/](https://remark42.com/)
+[https://www.devbitsandbytes.com/setting-up-remark42-from-scratch/](https://www.devbitsandbytes.com/setting-up-remark42-from-scratch/)
+[https://quantonganh.com/2019/10/11/static-site-generator](https://quantonganh.com/2019/10/11/static-site-generator)
+
+Modifications to hbs files to reference Cloudinary URLs and their responsive image sizing
+
+### Cloudinary
+
+[https://github.com/eexit/ghost-storage-cloudinary](https://github.com/eexit/ghost-storage-cloudinary)
+[https://cloudinary.com/](https://cloudinary.com/)
+
+A circular progress bar on page posts
+
+### Progress Bar
+
+[https://dev.to/shantanu\_jana/circular-progress-bar-using-html-and-css-1oda](https://dev.to/shantanu_jana/circular-progress-bar-using-html-and-css-1oda)
+inspired by
+[https://blog.jaysinha.me/setup-ghost-blog-with-custom-domain-secured-by-cloudflare/](https://blog.jaysinha.me/setup-ghost-blog-with-custom-domain-secured-by-cloudflare/)
+and a css arrow found at
+[https://freebiesupply.com/blog/css-arrows/](https://freebiesupply.com/blog/css-arrows/)
+
+An lightbox for the image galleries - instead of sending the viewer to a Cloudinary URL
+
+### fslightbox
+
+[https://fslightbox.com/javascript/documentation](https://fslightbox.com/javascript/documentation)
+inspired by
+[https://forum.ghost.org/t/fluidbox-on-london-theme/12278](https://forum.ghost.org/t/fluidbox-on-london-theme/12278)
+[https://moeen.salehi.pw/blog/how-to-add-lightbox-to-ghost-blog/](https://moeen.salehi.pw/blog/how-to-add-lightbox-to-ghost-blog/)
+
+Search capabilities
+
+### Ghosthunter
+
+[https://github.com/jamwise/ghostHunter](https://github.com/jamwise/ghostHunter)
+[https://www.hauntedthemes.com/how-to-add-search-to-ghost-using-ghosthunter/](https://www.hauntedthemes.com/how-to-add-search-to-ghost-using-ghosthunter/)
+and getting a better looking search input
+[https://freefrontend.com/css-search-boxes/](https://freefrontend.com/css-search-boxes/)
+specifically inspired by
+[https://codepen.io/ahmadbassamemran/pen/rNjMXqg](https://codepen.io/ahmadbassamemran/pen/rNjMXqg)
