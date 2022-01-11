@@ -85,52 +85,52 @@ I made some modifications to include a commenting system
 
 ### Remark42
 
-[https://remark42.com/](https://remark42.com/)
-[https://www.devbitsandbytes.com/setting-up-remark42-from-scratch/](https://www.devbitsandbytes.com/setting-up-remark42-from-scratch/)
+[https://remark42.com/](https://remark42.com/) 
+[https://www.devbitsandbytes.com/setting-up-remark42-from-scratch/](https://www.devbitsandbytes.com/setting-up-remark42-from-scratch/) 
 [https://quantonganh.com/2019/10/11/static-site-generator](https://quantonganh.com/2019/10/11/static-site-generator)
 
 Modifications to hbs files to reference Cloudinary URLs and their responsive image sizing
 
 ### Cloudinary
 
-[https://github.com/eexit/ghost-storage-cloudinary](https://github.com/eexit/ghost-storage-cloudinary)
+[https://github.com/eexit/ghost-storage-cloudinary](https://github.com/eexit/ghost-storage-cloudinary) 
 [https://cloudinary.com/](https://cloudinary.com/)
 
 A circular progress bar on page posts
 
 ### Progress Bar
 
-[https://dev.to/shantanu\_jana/circular-progress-bar-using-html-and-css-1oda](https://dev.to/shantanu_jana/circular-progress-bar-using-html-and-css-1oda)
-inspired by
-[https://blog.jaysinha.me/setup-ghost-blog-with-custom-domain-secured-by-cloudflare/](https://blog.jaysinha.me/setup-ghost-blog-with-custom-domain-secured-by-cloudflare/)
-and a css arrow found at
+[https://dev.to/shantanu\_jana/circular-progress-bar-using-html-and-css-1oda](https://dev.to/shantanu_jana/circular-progress-bar-using-html-and-css-1oda) 
+inspired by 
+[https://blog.jaysinha.me/setup-ghost-blog-with-custom-domain-secured-by-cloudflare/](https://blog.jaysinha.me/setup-ghost-blog-with-custom-domain-secured-by-cloudflare/) 
+and a css arrow found at 
 [https://freebiesupply.com/blog/css-arrows/](https://freebiesupply.com/blog/css-arrows/)
 
 An lightbox for the image galleries - instead of sending the viewer to a Cloudinary URL
 
 ### fslightbox
 
-[https://fslightbox.com/javascript/documentation](https://fslightbox.com/javascript/documentation)
-inspired by
-[https://forum.ghost.org/t/fluidbox-on-london-theme/12278](https://forum.ghost.org/t/fluidbox-on-london-theme/12278)
+[https://fslightbox.com/javascript/documentation](https://fslightbox.com/javascript/documentation) 
+inspired by 
+[https://forum.ghost.org/t/fluidbox-on-london-theme/12278](https://forum.ghost.org/t/fluidbox-on-london-theme/12278) 
 [https://moeen.salehi.pw/blog/how-to-add-lightbox-to-ghost-blog/](https://moeen.salehi.pw/blog/how-to-add-lightbox-to-ghost-blog/)
 
 Search capabilities
 
 ### Ghosthunter
 
-[https://github.com/jamwise/ghostHunter](https://github.com/jamwise/ghostHunter)
-[https://www.hauntedthemes.com/how-to-add-search-to-ghost-using-ghosthunter/](https://www.hauntedthemes.com/how-to-add-search-to-ghost-using-ghosthunter/)
-and getting a better looking search input
-[https://freefrontend.com/css-search-boxes/](https://freefrontend.com/css-search-boxes/)
-specifically inspired by
+[https://github.com/jamwise/ghostHunter](https://github.com/jamwise/ghostHunter) 
+[https://www.hauntedthemes.com/how-to-add-search-to-ghost-using-ghosthunter/](https://www.hauntedthemes.com/how-to-add-search-to-ghost-using-ghosthunter/) 
+and getting a better looking search input 
+[https://freefrontend.com/css-search-boxes/](https://freefrontend.com/css-search-boxes/) 
+specifically inspired by 
 [https://codepen.io/ahmadbassamemran/pen/rNjMXqg](https://codepen.io/ahmadbassamemran/pen/rNjMXqg)
 
 ### Theme Build Integration
 
-Integrated with GitHub action that triggers on check in
-[https://github.com/TryGhost/action-deploy-theme](https://github.com/TryGhost/action-deploy-theme)
+Integrated with GitHub action that triggers on check in 
+[https://github.com/TryGhost/action-deploy-theme](https://github.com/TryGhost/action-deploy-theme) 
 modified due to how my repo is set up and a [PR](https://github.com/TryGhost/action-deploy-theme/pull/39) that is taking its time being accepted
-[https://github.com/chtran46/action-deploy-theme](https://github.com/chtran46/action-deploy-theme)
+[https://github.com/chtran46/action-deploy-theme](https://github.com/chtran46/action-deploy-theme) 
 with the action yml configured as
 [https://github.com/chtran46/ghost-cms/blob/main/.github/workflows/deploy-theme.yml](https://github.com/chtran46/ghost-cms/blob/main/.github/workflows/deploy-theme.yml)
