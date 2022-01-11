@@ -22,6 +22,7 @@
     this will take care of caching and cache-busting automatically --}}
     <link rel="stylesheet" type="text/css" href="{{asset "built/screen.css"}}" />
     <link rel="stylesheet" type="text/css" href="{{asset "built/search.css"}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset "built/titlesvg.css"}}" />
 	  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
     {{!-- This tag outputs all your advanced SEO meta, structured data, and other important settings,
@@ -103,6 +104,7 @@
 </script>
 <script src="{{asset "built/casper.js"}}"></script>
 <script>
+  var wrapper = document.querySelector('.wrapper svg');
 $(document).ready(function () {
     // Mobile Menu Trigger
     $('.gh-burger').click(function () {
@@ -110,6 +112,8 @@ $(document).ready(function () {
     });
     // FitVids - Makes video embeds responsive
     $(".gh-content").fitVids();
+    // activate title svg found in index.hbs
+    wrapper.classList.add('active');
 });
 </script>
 <script type="text/javascript" src="{{asset "js/ghosthunter.min.js"}}"></script>
