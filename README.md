@@ -29,7 +29,7 @@ volumes:
   ghost_data:
 ```
 
-Start container and connect to shell
+Start container and connect to shell (as 'node' user)
 
 ## Run in Shell to install Cloudinary integration
 
