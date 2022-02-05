@@ -35,9 +35,10 @@ Start container and connect to shell (as 'node' user)
 
 ``` Shell
 cd $GHOST_INSTALL
-yarn add ghost-storage-cloudinary@2 --network-timeout 100000
+yarn add ghost-storage-cloudinary --network-timeout 100000
 mkdir -p content/adapters/storage
 mv node_modules/ghost-storage-cloudinary content/adapters/storage/ghost-storage-cloudinary
+ln -sf /var/lib/ghost/node_modules/image-size/bin/image-size.js /var/lib/ghost/content/adapters/storage/ghost-storage-cloudinary/node_modules/.bin/image-size 
 ghost config storage.active ghost-storage-cloudinary; \
 ghost config storage.ghost-storage-cloudinary.useDatedFolder true; \
 ghost config storage.ghost-storage-cloudinary.upload.use_filename true; \
